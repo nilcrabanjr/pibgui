@@ -1,6 +1,6 @@
 import pyglet
 
-class text_label():
+class TextLabel():
 	def __init__(text_label, name, text, font, fontsize, x, y, xanchor, yanchor):
 		text_label.name = name
 		text_label.text = text 

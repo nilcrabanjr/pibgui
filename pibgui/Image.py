@@ -1,6 +1,6 @@
 import pyglet
 
-class image():
+class Image():
 	def __init__(image, name, source, x, y):
 		image.name = name
 		image.source = source

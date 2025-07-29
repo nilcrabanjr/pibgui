@@ -1,27 +1,17 @@
 import pyglet
 from pibgui.Image import *
 from pibgui.Label import *
+from pibgui.Keyboard import *
 
-class window():
+class Window():
 	def __init__(window, name):
 		window.name = name
 		window.window = pyglet.window.Window()
 		window.labellist = []
 		window.imagelist = []
+		window.keyboard = Keyboard()
 
-	def __str__(window):
-		return
-
-	def add_to_render(window, *items):
-		for item in items:
-			if isinstance(item, text_label):
-				window.labellist.append(item)
-			elif isinstance(item, image):
-				window.imagelist.append(item)
-			else:
-				print(f"Warning: Unknown item type '{type(item)}' not added.")
-
-	def draw_window(window):
+		# Draw handler
 		@window.window.event
 		def on_draw():
 			window.window.clear()
@@ -30,3 +20,23 @@ class window():
 			for image in window.imagelist:
 				image.draw_image()
 
+		# Keyboard handlers
+		@window.window.event
+		def on_key_press(symbol, modifiers):
+			window.keyboard.on_key_press(symbol, modifiers)
+
+		@window.window.event
+		def on_key_release(symbol, modifiers):
+			window.keyboard.on_key_release(symbol, modifiers)
+
+	def __str__(window):
+		return window.name
+
+	def add_to_render(window, *items):
+		for item in items:
+			if isinstance(item, TextLabel):
+				window.labellist.append(item)
+			elif isinstance(item, Image):
+				window.imagelist.append(item)
+			else:
+				print(f"Error: Unknown item type")
